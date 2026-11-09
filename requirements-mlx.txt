@@ -1,0 +1,19 @@
+# MLX port of the NCM evaluation stack (macOS / Apple silicon).
+#
+#   uv pip install -r requirements-mlx.txt
+#
+# `python -m mlx_ncm.convert` additionally needs torch to read the released .pt
+# files; the converted safetensors files let you drop it afterwards.
+# `mlx-lm` is only needed for generative-perplexity scoring (genppl metrics).
+mlx>=0.20
+numpy
+omegaconf
+transformers>=4.51
+huggingface_hub[cli]
+regex
+rouge_score
+sacrebleu
+
+# --- optional -------------------------------------------------------------
+# mlx-lm>=0.20        # reference LM for generative perplexity, native MLX
+# torch               # only for `python -m mlx_ncm.convert` (reads .pt files)

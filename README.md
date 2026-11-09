@@ -65,6 +65,29 @@ pip install -r requirements.txt
 
 Python 3.10 or newer and a CUDA-capable PyTorch installation are recommended.
 
+### Apple silicon (MLX)
+
+An MLX port lives in `mlx_ncm/` and runs the released checkpoints on the Apple
+GPU with no CUDA and no PyTorch at inference time:
+
+```bash
+pip install -r requirements-mlx.txt
+
+# one-time: convert the .pt checkpoints into MLX safetensors (needs torch)
+python -m mlx_ncm.convert --config config/eval/xsum.yaml \
+    --checkpoint-dir artifacts/xsum --out artifacts-mlx/xsum
+
+# evaluate exactly like evaluate.py
+python -m mlx_ncm.evaluate --config config/eval/xsum.yaml \
+    --checkpoint-dir artifacts-mlx/xsum --data-dir data/xsum
+```
+
+It reproduces the reference implementation to float32 round-off (`~5e-7`) and
+produces identical tokens for greedy, KV-cache and CFG decoding. See
+[`docs/MLX_MIGRATION.md`](docs/MLX_MIGRATION.md) for the framework mapping,
+checkpoint conversion, validation results and limitations.
+
+
 ## Evaluation
 
 Download the checkpoints and evaluation inputs:

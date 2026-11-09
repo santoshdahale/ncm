@@ -131,11 +131,15 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv-mlx/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# MLX port artifacts
+artifacts-mlx/
 
 # Spyder project settings
 .spyderproject
